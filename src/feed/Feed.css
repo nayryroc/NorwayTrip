@@ -1,0 +1,26 @@
+.feed__title{
+    text-align: center;
+    margin-bottom: 35px;
+    padding-bottom: 15px;
+    position: relative;
+}
+
+.feed__title::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 250px;
+    height: 2px;
+    background-color: #eee;
+    transform:translateX(-50%);
+}
+
+.feed__posts{
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -25px;
+    margin-bottom: -25px;
+    align-items: stretch;
+}
+
