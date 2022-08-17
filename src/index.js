@@ -13,12 +13,12 @@ import EditPost from "./admin/console/post/EditPost";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<BrowserRouter>
     <Routes>
-        <Route index element={<App/>}></Route>
-        <Route path={"post"} element={<PostContent/>} />
-        <Route path={"admin"} element={<Admin/>}/>
-        <Route path={"admin/console"} element={<Console/>}/>
-        <Route path={"admin/console/create-post"} element={<Create/>}/>
-        <Route path={"admin/console/post"} element={<EditPost/>}/>
+        <Route path={process.env.PUBLIC_URL + "/"} element={<App/>}></Route>
+        <Route path={process.env.PUBLIC_URL + "/post"} element={<PostContent/>} />
+        <Route path={process.env.PUBLIC_URL + "/admin"} element={<Admin/>}/>
+        <Route path={process.env.PUBLIC_URL + "/admin/console"} element={<Console/>}/>
+        <Route path={process.env.PUBLIC_URL + "/admin/console/create-post"} element={<Create/>}/>
+        <Route path={process.env.PUBLIC_URL + "/admin/console/post"} element={<EditPost/>}/>
     </Routes>
 </BrowserRouter>);
 
