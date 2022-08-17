@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.6533551c.css",
+    "main.css": "/static/css/main.d215a090.css",
     "main.js": "/static/js/main.f55f0457.js",
     "static/media/alesund.jpg": "/static/media/alesund.b871793811fbaa205edc.jpg",
     "static/media/Lato-Regular.ttf": "/static/media/Lato-Regular.9d883d540ee2b4de8024.ttf",
@@ -10,11 +10,11 @@
     "static/media/trash.svg": "/static/media/trash.4c63fbc571635c388130.svg",
     "index.html": "/index.html",
     "static/media/plus.svg": "/static/media/plus.e5cd68e58ecd486bb4c6.svg",
-    "main.6533551c.css.map": "/static/css/main.6533551c.css.map",
+    "main.d215a090.css.map": "/static/css/main.d215a090.css.map",
     "main.f55f0457.js.map": "/static/js/main.f55f0457.js.map"
   },
   "entrypoints": [
-    "static/css/main.6533551c.css",
+    "static/css/main.d215a090.css",
     "static/js/main.f55f0457.js"
   ]
 }
