@@ -1,20 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.bd15d074.css",
-    "main.js": "/static/js/main.f55f0457.js",
+    "main.css": "/static/css/main.fc73a4eb.css",
+    "main.js": "/static/js/main.59c70d56.js",
     "static/media/alesund.jpg": "/static/media/alesund.b871793811fbaa205edc.jpg",
     "static/media/Lato-Regular.ttf": "/static/media/Lato-Regular.9d883d540ee2b4de8024.ttf",
     "static/media/Lato-Bold.ttf": "/static/media/Lato-Bold.636be8de934918e38ed9.ttf",
     "static/media/CinzelDecorative-Bold.ttf": "/static/media/CinzelDecorative-Bold.4701e9921703cb64dfce.ttf",
     "static/media/CinzelDecorative-Regular.ttf": "/static/media/CinzelDecorative-Regular.c243877d82654b511c69.ttf",
+    "static/media/views.svg": "/static/media/views.2692b05dbf1ae26ec304.svg",
     "static/media/trash.svg": "/static/media/trash.4c63fbc571635c388130.svg",
     "index.html": "/index.html",
     "static/media/plus.svg": "/static/media/plus.e5cd68e58ecd486bb4c6.svg",
-    "main.bd15d074.css.map": "/static/css/main.bd15d074.css.map",
-    "main.f55f0457.js.map": "/static/js/main.f55f0457.js.map"
+    "main.fc73a4eb.css.map": "/static/css/main.fc73a4eb.css.map",
+    "main.59c70d56.js.map": "/static/js/main.59c70d56.js.map"
   },
   "entrypoints": [
-    "static/css/main.bd15d074.css",
-    "static/js/main.f55f0457.js"
+    "static/css/main.fc73a4eb.css",
+    "static/js/main.59c70d56.js"
   ]
 }
