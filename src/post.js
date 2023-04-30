@@ -1,6 +1,6 @@
 class Post {
 
-    constructor(title, description, image_path, post_body, post_type, date, timestamp) {
+    constructor(title, description, image_path, post_body, post_type, date, timestamp, views) {
         this.title = title;
         this.description = description;
         this.image_path = image_path;
@@ -9,6 +9,7 @@ class Post {
         this.id = null;
         this.date = date;
         this.timestamp = timestamp;
+        this.views = views;
     }
 
     getTitle(){
@@ -37,6 +38,10 @@ class Post {
 
     getDate(){
         return this.date;
+    }
+
+    getViews(){
+        return this.views;
     }
 
     setTitle(title){
@@ -77,12 +82,13 @@ export var postConverter = {
             post_body: post.post_body,
             post_type: post.post_type,
             date: post.date,
-            timestamp: post.timestamp
+            timestamp: post.timestamp,
+            views: post.views
         };
     },
     fromFirestore: function(snapshot, options){
         const data = snapshot.data(options);
-        return new Post(data.title, data.description, data.image_path, data.post_body, data.post_type, data.date, data.timestamp);
+        return new Post(data.title, data.description, data.image_path, data.post_body, data.post_type, data.date, data.timestamp, data.views);
     }
 };
 

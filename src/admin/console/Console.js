@@ -56,7 +56,7 @@ function Console(){
                     <div className="feed__posts">
                         {
                             posts.map((post, i) => {
-                                return <PostPreview key={i} post={post} view={false}/>
+                                return <PostPreview key={i} post={post} view={false} isAdmin={true}/>
                             })
                         }
                     </div>

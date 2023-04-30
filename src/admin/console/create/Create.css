@@ -234,7 +234,7 @@
     background-color: #cac9d9;
 }
 
-.button{
+.create-button{
     padding: 15px 20px;
     display: block;
     background-color: #DBDAEA;
@@ -242,9 +242,9 @@
     transition: 0.4s;
 }
 
-.button:hover,
-.button:active,
-.button:focus{
+.create-button:hover,
+.create-button:active,
+.create-button:focus{
     background-color: #cac9d9;
     cursor: pointer;
 }

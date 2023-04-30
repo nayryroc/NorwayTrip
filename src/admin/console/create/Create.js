@@ -199,7 +199,7 @@ function Create(){
             }
         }
 
-        let post = new Post(title, desc, imgRef.fullPath, content, "", date, timestamp);
+        let post = new Post(title, desc, imgRef.fullPath, content, "", date, timestamp, 0);
 
         db.collection("Post").withConverter(postConverter).add(post).then(() => {
             navigate("/admin/console");
@@ -328,7 +328,7 @@ function Create(){
 
                     </div>
                     {(error) ? <p className="error error_center">Error creating post. Make sure all fields are filled out.</p> : ""}
-                    <button className={"button publish__button"} onClick={()=>{publish()}}>Publish</button>
+                    <button className={"create-button publish__button"} onClick={()=>{publish()}}>Publish</button>
 
 
                 </div>

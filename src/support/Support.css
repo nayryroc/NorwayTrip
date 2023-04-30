@@ -1,0 +1,53 @@
+.support__intro-text{
+    margin-bottom: 3rem;
+}
+
+.support__text{
+    margin-bottom: 1rem;
+}
+
+.address-text{
+    margin-bottom: 2rem;
+}
+
+.support__button{
+    margin-bottom: 2rem;
+}
+
+.support__desc{
+    margin-bottom: 0.5rem;
+}
+
+.support__donate{
+    display: flex;
+    justify-content: space-between;
+    margin-right: -50px;
+}
+
+.support__monthly{
+    width: 50%;
+    margin-right: 50px;
+}
+
+.support__once{
+    width: 50%;
+    margin-right: 50px;
+}
+
+
+@media(max-width: 600px){
+    .support__donate{
+        margin-right: 0px;
+        flex-wrap: wrap;
+    }
+    
+    .support__monthly{
+        width: 100%;
+        margin-right: 0px;
+    }
+    
+    .support__once{
+        width: 100%;
+        margin-right: 0px;
+    }
+}

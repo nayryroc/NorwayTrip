@@ -1,37 +1,207 @@
-
-
 .header{
     position: relative;
-    height: 100vh;
-    width: 100vw;
-    max-width: 100%;
-    background-image: url('../images/alesund.jpg');
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
+    z-index: 1;
 }
 
-.header::before{
+.header_filter::before{
     content: '';
     position: absolute;
+    z-index: -1;
     top: 0;
-    bottom: 0;
-    right: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255,255,255,0.3);
+
 }
 
-.header_sm{
-    height: 250px;
+.header__content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 25px 15px;
+}
+
+.header__logo{
+    display: block;
+    height: 5em;
+    width: 5em;
+    border-radius: 100%; 
+    background-image: url("../images/logo-dark.svg");
+    background-color: rgba(177, 211, 247, 0.5);
+    background-position: center center;
+    background-size: 3.5em;
+    background-repeat: no-repeat;
+}
+
+.header__text{
+    max-width: 1250px;
+    margin: 0 auto;
+    padding-block: 10%;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .header__title{
-    position: relative;
-    width: 100%;
-    top: 50%;
-    transform:translateY(-50%);
-    color: #fff;
+    width: 60%;
     text-align: center;
-    margin: 0;
-    padding: 0 15px;
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 1);
+}
+
+.header_subpage .header__title{
+    width: 100%;
+}
+
+.nav{
+    display: flex;
+    justify-content: flex-end;
+    padding-block: 10px;
+    padding-right: 2.25em;
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+.nav__item{
+    position: relative;
+    margin-left: 2em;
+    padding-left: 0.25em;
+    text-decoration: none;
+    color: #000;
+    transition: 0.4s;
+    
+}
+
+.nav__item::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 0;
+    width: 2px;
+    background-color: #000;
+    transition: 0.4s;
+
+}
+
+.nav__item:hover.nav__item::before{
+    height: 100%;
+}
+
+.menu{
+    display: none;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    background-image: url("../images/menu-icon.svg");
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 2rem;
+    height: 2rem;
+    
+}
+
+.header-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 999;
+    display: none;
+}
+
+.visible{
+    display: block;
+}
+
+.header-overlay__logo-wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.header-overlay__logo{
+    display: block;
+    height: 10em;
+    width: 10em;
+    margin-block: 3em;
+    border-radius: 100%; 
+    background-image: url("../images/logo-dark.svg");
+    background-color: rgba(177, 211, 247, 0.5);
+    background-position: center center;
+    background-size: 7em;
+    background-repeat: no-repeat;
+}
+
+.header-overlay-nav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.header-overlay-nav__item{
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    color: #000;
+    transition: 0.4s;
+}
+
+.header-overlay-nav__item::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 0;
+    width: 2px;
+    background-color: #000;
+    transition: 0.4s;
+}
+
+.header-overlay-nav__item:hover.header-overlay-nav__item::before{
+    height: 100%;
+}
+
+.header-overlay__x{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    height: 2rem;
+    width: 2rem;
+    background-image: url("../images/x.svg");
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+@media(max-width: 600px){
+    .nav{
+        display: none;
+    }
+
+    .menu{
+        display: block;
+    }
+
+}
+
+@media(max-width: 500px){
+    .header__title{
+        width: 60%;
+        margin: 0 auto;
+        text-align: center;
+    }
 }

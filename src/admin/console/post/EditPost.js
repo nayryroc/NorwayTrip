@@ -254,7 +254,7 @@ function EditPost(){
             }
         }
 
-        let post = new Post(title, desc, imgRef.fullPath, content, "", date);
+        let post = new Post(title, desc, imgRef.fullPath, content, "", date, 0, 0);
 
         db.collection("Post").doc(searchParams.get("id")).withConverter(postConverter).update({date: post.getDate(), description: post.getDescription(), title: post.getTitle(), image_path: post.getImagePath(), post_body: post.getPostBody()}).then(() => {
             navigate("/admin/console");

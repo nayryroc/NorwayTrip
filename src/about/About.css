@@ -1,0 +1,45 @@
+.about{
+    display: flex;
+    align-items: center;
+}
+
+.about__img{
+    width: 35%;
+}
+
+.about__content{
+    width: 65%;
+    padding-left: 10%;
+}
+
+.about__title{
+    margin-bottom: 0.5em;
+}
+
+
+@media(max-width: 500px){
+    .about{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .about__img{
+        width: 50%;
+        margin-bottom: 25px;
+    }
+
+    .about__content{
+        width: 75%;
+        padding: 0;
+    }
+}
+
+@media(max-width: 350px){
+    .about__img{
+        width: 100%;
+    }
+
+    .about__content{
+        width: 100%;
+    }
+}

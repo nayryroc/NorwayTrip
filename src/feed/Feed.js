@@ -45,11 +45,10 @@ function Feed() {
         <div className="section">
             <div className="section__content">
                 <div className="feed">
-                    <h2 className={"title feed__title"}>Latest Updates</h2>
                     <div className="feed__posts">
                         {
                             posts.map((post, i) => {
-                                return <PostPreview key={i} post={post} view={true}/>
+                                return <PostPreview key={i} post={post} view={true} isAdmin={false}/>
                             })
                         }
                     </div>

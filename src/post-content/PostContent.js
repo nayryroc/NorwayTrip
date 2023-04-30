@@ -8,6 +8,7 @@ import Header from "../header/Header";
 import './PostContent.css';
 import {getDownloadURL, ref} from "firebase/storage";
 import {Carousel} from "react-responsive-carousel";
+import firebase from "firebase/compat/app";
 
 function PostContent(){
     const [searchParams, setSearchParams] = useSearchParams();
@@ -15,6 +16,7 @@ function PostContent(){
     const [post, setPost] = useState(null);
     const [version, setVersion] = useState(0);
     const [update, setUpdate] = useState(false);
+    var timeout;
 
     useEffect(() => {
         if(!didLoad) {
@@ -46,6 +48,9 @@ function PostContent(){
 
             window.scrollTo(0, 0);
 
+            db.collection("Post").doc(searchParams.get("id")).update({views: firebase.firestore.FieldValue.increment(1)}).then(r => {})
+
+
             setDidLoad(true);
         }
 
@@ -54,7 +59,9 @@ function PostContent(){
                 setUpdate(false);
             }
 
+
     })
+
 
 
     return(

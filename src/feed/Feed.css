@@ -24,3 +24,8 @@
     align-items: stretch;
 }
 
+@media(max-width: 650px){
+    .feed__posts{
+        margin-right: 0;
+    }
+}
