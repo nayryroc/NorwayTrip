@@ -1,21 +1,31 @@
 {
   "files": {
-    "main.css": "/static/css/main.d7af3c3c.css",
-    "main.js": "/static/js/main.e65b4a84.js",
-    "static/media/alesund.jpg": "/static/media/alesund.b871793811fbaa205edc.jpg",
+    "main.css": "/static/css/main.c5e6c9cc.css",
+    "main.js": "/static/js/main.40cb1b32.js",
+    "static/media/png-bg.jpg": "/static/media/png-bg.54fddf324e0c67a8ea28.jpg",
+    "static/media/mountains.jpg": "/static/media/mountains.794e784c75bb86eb9bbe.jpg",
+    "static/media/mountains2.jpg": "/static/media/mountains2.29e31c7c161c05358c04.jpg",
+    "static/media/fjord-bg.jpg": "/static/media/fjord-bg.76d7f3a03945146ba73c.jpg",
+    "static/media/png_sunset.jpg": "/static/media/png_sunset.980a88c7846b64e08b65.jpg",
     "static/media/Lato-Regular.ttf": "/static/media/Lato-Regular.9d883d540ee2b4de8024.ttf",
     "static/media/Lato-Bold.ttf": "/static/media/Lato-Bold.636be8de934918e38ed9.ttf",
+    "static/media/cory.jpg": "/static/media/cory.5a00e7dab4e35269fa7d.jpg",
     "static/media/CinzelDecorative-Bold.ttf": "/static/media/CinzelDecorative-Bold.4701e9921703cb64dfce.ttf",
     "static/media/CinzelDecorative-Regular.ttf": "/static/media/CinzelDecorative-Regular.c243877d82654b511c69.ttf",
-    "static/media/views.svg": "/static/media/views.2692b05dbf1ae26ec304.svg",
+    "static/media/mountains.png": "/static/media/mountains.1562acd00a758ff310a7.png",
+    "static/media/menu-icon.svg": "/static/media/menu-icon.a425255c445e2676619c.svg",
+    "static/media/views.svg": "/static/media/views.67662ab8f0fbd8ccabea.svg",
     "static/media/trash.svg": "/static/media/trash.4c63fbc571635c388130.svg",
+    "static/media/x.svg": "/static/media/x.f52a7d36baf4f9187df7.svg",
     "index.html": "/index.html",
     "static/media/plus.svg": "/static/media/plus.e5cd68e58ecd486bb4c6.svg",
-    "main.d7af3c3c.css.map": "/static/css/main.d7af3c3c.css.map",
-    "main.e65b4a84.js.map": "/static/js/main.e65b4a84.js.map"
+    "static/media/logo-dark.svg": "/static/media/logo-dark.66e17d19f67a267098f7.svg",
+    "static/media/logo.svg": "/static/media/logo.2a4281e8604016dacccb.svg",
+    "main.c5e6c9cc.css.map": "/static/css/main.c5e6c9cc.css.map",
+    "main.40cb1b32.js.map": "/static/js/main.40cb1b32.js.map"
   },
   "entrypoints": [
-    "static/css/main.d7af3c3c.css",
-    "static/js/main.e65b4a84.js"
+    "static/css/main.c5e6c9cc.css",
+    "static/js/main.40cb1b32.js"
   ]
 }

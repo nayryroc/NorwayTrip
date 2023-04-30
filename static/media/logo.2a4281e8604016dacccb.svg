@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+              "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1.33333in" height="1.33333in"
+     viewBox="-10 -10 425 425">
+  <path id="CS-logo"
+        fill="none" stroke="white" stroke-width="20"
+        d="M 196.67,4.17
+           L 8.00,98.50
+             196.99,204.49
+           
+           M 358.50,124.00
+           
+           L 197.00,204.50
+             394.50,309.00
+             211.50,398.00" />
+</svg>
