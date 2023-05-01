@@ -38,6 +38,7 @@ html{
 .menu-open{
     overflow: hidden;
     height: 100vh;
+    position: relative;
 }
 
 
