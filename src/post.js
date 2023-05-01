@@ -1,9 +1,10 @@
 class Post {
 
-    constructor(title, description, image_path, post_body, post_type, date, timestamp, views) {
+    constructor(title, description, image_path, header_path, post_body, post_type, date, timestamp, views) {
         this.title = title;
         this.description = description;
         this.image_path = image_path;
+        this.header_path = header_path;
         this.post_body = post_body;
         this.post_type = post_type;
         this.id = null;
@@ -22,6 +23,10 @@ class Post {
 
     getImagePath(){
         return this.image_path;
+    }
+
+    getHeaderPath(){
+        return this.header_path;
     }
 
     getId(){
@@ -56,6 +61,10 @@ class Post {
         this.image_path = path;
     }
 
+    setHeaderPath(path){
+        this.header_path = path;
+    }
+
     setPostBody(body){
         this.post_body = body;
     }
@@ -79,6 +88,7 @@ export var postConverter = {
             title: post.title,
             description: post.description,
             image_path: post.image_path,
+            header_path: post.header_path,
             post_body: post.post_body,
             post_type: post.post_type,
             date: post.date,
@@ -88,7 +98,7 @@ export var postConverter = {
     },
     fromFirestore: function(snapshot, options){
         const data = snapshot.data(options);
-        return new Post(data.title, data.description, data.image_path, data.post_body, data.post_type, data.date, data.timestamp, data.views);
+        return new Post(data.title, data.description, data.image_path, data.header_path, data.post_body, data.post_type, data.date, data.timestamp, data.views);
     }
 };
 

@@ -9,6 +9,8 @@ import './PostContent.css';
 import {getDownloadURL, ref} from "firebase/storage";
 import {Carousel} from "react-responsive-carousel";
 import firebase from "firebase/compat/app";
+import Footer from "../footer/Footer";
+import defBG from "../images/mountains2.jpg";
 
 function PostContent(){
     const [searchParams, setSearchParams] = useSearchParams();
@@ -20,9 +22,19 @@ function PostContent(){
 
     useEffect(() => {
         if(!didLoad) {
+    
             db.collection("Post").doc(searchParams.get("id")).withConverter(postConverter).get().then((snapshot) => {
                 let data = snapshot.data();
                 setPost(data);
+
+                if(data.getHeaderPath() != null && data.getHeaderPath() != ""){
+                    getDownloadURL(ref(storage, data.getHeaderPath())).then((url) => {
+                        data.setHeaderPath(url);
+                        setPost(data);
+                        setUpdate(true);
+                    })
+                }
+
                 for(let i = 0; i < data.getPostBody().length; i++){
                     if(data.getPostBody()[i].type === "image"){
                         getDownloadURL(ref(storage, data.getPostBody()[i].content)).then(url => {
@@ -66,12 +78,9 @@ function PostContent(){
 
     return(
         <div className="page">
-            <Header subpage={true}/>
+            <Header subpage={true} title={(post !== null) ? post.getTitle() : ""} bg={((post != null && post.getHeaderPath() != null && post.getHeaderPath() != "") ? post.getHeaderPath() : defBG)} filter={true}/>
             <div className="section">
                 <div className="section__content section__content_sm">
-                    <Link to={"/"} className={"post-back post-back_first text"}>&#60; BACK TO HOME</Link>
-
-                    <h1 className={"title title_md"}>{(post !== null) ? post.getTitle() : ""}</h1>
                     <p className="text text_sm post-date">{(post !== null) ? post.getDate() : ""}</p>
                     <div className="post-content">
 
@@ -95,11 +104,10 @@ function PostContent(){
                             })
                                 : ""
                         }
-
-                        <Link to={"/"} className={"post-back text"}>&#60; BACK TO HOME</Link>
                     </div>
                 </div>
             </div>
+            <Footer alt={true}/>
         </div>
 
 

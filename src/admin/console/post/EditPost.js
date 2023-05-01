@@ -10,6 +10,7 @@ import {Carousel} from "react-responsive-carousel";
 
 function EditPost(){
     const [banner, setBanner] = useState(null);
+    const [header, setHeader] = useState(null);
     const [loaded, setLoaded] = useState(false);
     const [content, setContent] = useState([]);
     const [version, setVersion] = useState(0);
@@ -42,6 +43,13 @@ function EditPost(){
                     setBanner(url);
                     setUpdate(true);
                 })
+
+                if(data.getHeaderPath() != null && data.getHeaderPath() != ""){
+                    getDownloadURL(ref(storage, data.getHeaderPath())).then(url => {
+                        setHeader(url);
+                        setUpdate(true);
+                    })
+                }
 
                 document.getElementById("new-post-title").value = data.getTitle();
                 document.getElementById("new-post-description").value = data.getDescription();
@@ -231,6 +239,18 @@ function EditPost(){
             imgRef = {fullPath: banner};
         }
 
+
+        let imgRef2;
+        if(header instanceof Object) {
+            imgRef2 = ref(storage, `${new Date().toString().replaceAll(/[ \-():]/g, "")}-${header.name.replaceAll(/[ \-():]/g, "")}`);
+            uploadBytes(imgRef2, header).then((snapshot) => {
+                console.log("uploaded");
+            });
+        }else{
+            imgRef2 = {fullPath: header};
+        }
+
+
         let c = content;
         for(let i = 0; i < content.length; i++){
             if(content[i].type === "image" && content[i].content instanceof Object){
@@ -254,9 +274,9 @@ function EditPost(){
             }
         }
 
-        let post = new Post(title, desc, imgRef.fullPath, content, "", date, 0, 0);
+        let post = new Post(title, desc, imgRef.fullPath, imgRef2.fullPath, content, "", date, 0, 0);
 
-        db.collection("Post").doc(searchParams.get("id")).withConverter(postConverter).update({date: post.getDate(), description: post.getDescription(), title: post.getTitle(), image_path: post.getImagePath(), post_body: post.getPostBody()}).then(() => {
+        db.collection("Post").doc(searchParams.get("id")).withConverter(postConverter).update({date: post.getDate(), description: post.getDescription(), title: post.getTitle(), image_path: post.getImagePath(), header_path: post.getHeaderPath(), post_body: post.getPostBody()}).then(() => {
             navigate("/admin/console");
             console.log("EditPost added!");
         })
@@ -318,6 +338,11 @@ function EditPost(){
                     <label htmlFor="new-post-banner" className={"title title_sm"}>Banner Image</label>
                     <div className="new-post__file-input" style={(banner instanceof Object) ? {backgroundImage:"url(" + URL.createObjectURL(banner) + ")"} : {backgroundImage:"url(" + banner + ")"}}>
                         <input type="file" id={"new-post-banner"} accept={"image/jpeg, image/png"} className={"new-post__banner"} onChange={(event) => {setBanner(event.target.files[0]);}}/>
+                    </div>
+
+                    <label htmlFor="new-post-header" className={"title title_sm"}>Header Image</label>
+                    <div className="new-post__file-input" style={(header instanceof Object) ? {backgroundImage:"url(" + URL.createObjectURL(header) + ")"} : {backgroundImage:"url(" + header + ")"}}>
+                        <input type="file" id={"new-post-header"} accept={"image/jpeg, image/png"} className={"new-post__banner"} onChange={(event) => {setHeader(event.target.files[0]);}}/>
                     </div>
 
                     <div className="post-content">

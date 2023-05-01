@@ -7,31 +7,61 @@ import 'firebase/compat/firestore';
 import {postConverter} from '../post';
 import React, {useEffect, useState} from "react";
 
+
 function Feed() {
     const [posts, setPosts] = useState([]);
     const [didLoad, setDidLoad] = useState(false);
+    const [currPage, setCurrPage] = useState(1);
+    const [pageCount, setPageCount] = useState(0);
+    const [lastPost, setLastPost] = useState([]);
+    const PAGE_SIZE = 6;
+
 
     useEffect(() => {
         if(!didLoad){
-            loadPosts();
+            getCount();
             window.scrollTo(0, 0);
             setDidLoad(true);
         }
     })
 
+    function getCount(){
+        db.collection('PostCount').get().then((querySnapshot) => {
+            setPageCount(getPages(querySnapshot.docs[0].data().count));
+            loadPosts(1);
+        }).catch((error) => {
+            console.log("Error reading document: " + error);
+        })
+    }
 
-    function loadPosts(){
 
-        let posts = [];
+    function getPages(count){
+        let pages = count / PAGE_SIZE;
+        if(pages != Math.trunc(pages)){
+            pages = Math.trunc(pages) + 1;
+        }
+        return pages;
+    }
 
-        db.collection('Post').orderBy("timestamp", "desc").withConverter(postConverter).get().then((querySnapshot) => {
+    function loadPosts(pageNum){
+
+        let newPosts = [];
+
+        db.collection('Post').orderBy("timestamp", "desc").withConverter(postConverter).startAfter(lastPost).limit(PAGE_SIZE).get().then((querySnapshot) => {
 
             querySnapshot.docs.map(doc => {
                 let p = doc.data();
                 p.setId(doc.id);
-                posts.push(p);
+                newPosts.push(p);
             });
-            setPosts(posts);
+            setLastPost(querySnapshot.docs[querySnapshot.docs.length - 1]);
+            
+            if(posts.length > 0){
+                let temp = posts;
+                newPosts = temp.concat(newPosts);
+            }
+            
+            setPosts(newPosts);
 
         }).catch((error) => {
             console.log("Error reading document: " + error);
@@ -51,6 +81,7 @@ function Feed() {
                                 return <PostPreview key={i} post={post} view={true} isAdmin={false}/>
                             })
                         }
+                        {((currPage < pageCount) ? <button className='button button_alt feed-button' onClick={()=>{setCurrPage(currPage+1); loadPosts(currPage)}}>Load More</button> : "")}
                     </div>
                 </div>
             </div>

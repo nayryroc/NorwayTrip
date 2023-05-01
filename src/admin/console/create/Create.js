@@ -11,6 +11,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"
 
 function Create(){
     const [banner, setBanner] = useState(null);
+    const [header, setHeader] = useState(null);
     const [loaded, setLoaded] = useState(false);
     const [content, setContent] = useState([]);
     const [version, setVersion] = useState(0);
@@ -176,6 +177,12 @@ function Create(){
         uploadBytes(imgRef, banner).then((snapshot) => {
             console.log("uploaded");
         });
+
+        let imgRef2 = ref(storage, `${new Date().toString().replaceAll(/[ \-():]/g, "")}-${header.name.replaceAll(/[ \-():]/g, "")}`);
+        uploadBytes(imgRef2, header).then((snapshot) => {
+            console.log("uploaded");
+        });
+
         let c = content;
         for(let i = 0; i < content.length; i++){
             if(content[i].type === "image"){
@@ -199,11 +206,15 @@ function Create(){
             }
         }
 
-        let post = new Post(title, desc, imgRef.fullPath, content, "", date, timestamp, 0);
+        let post = new Post(title, desc, imgRef.fullPath, imgRef2.fullPath, content, "", date, timestamp, 0);
 
         db.collection("Post").withConverter(postConverter).add(post).then(() => {
             navigate("/admin/console");
             console.log("EditPost added!");
+            const countRef = db.collection('PostCount').doc('postcount');
+            countRef.update({
+                count: firebase.firestore.FieldValue.increment(1)
+            });
         })
 
 
@@ -265,6 +276,11 @@ function Create(){
                     <label htmlFor="new-post-banner" className={"title title_sm"}>Banner Image</label>
                     <div className="new-post__file-input" style={(banner != null) ? {backgroundImage:"url(" + URL.createObjectURL(banner) + ")"} : {}}>
                         <input type="file" id={"new-post-banner"} accept={"image/jpeg, image/png"} className={"new-post__banner"} onChange={(event) => {setBanner(event.target.files[0]);}}/>
+                    </div>
+
+                    <label htmlFor="new-post-header" className={"title title_sm"}>Header Image</label>
+                    <div className="new-post__file-input" style={(header != null) ? {backgroundImage:"url(" + URL.createObjectURL(header) + ")"} : {}}>
+                        <input type="file" id={"new-post-header"} accept={"image/jpeg, image/png"} className={"new-post__banner"} onChange={(event) => {setHeader(event.target.files[0]);}}/>
                     </div>
 
                     <div className="post-content">
