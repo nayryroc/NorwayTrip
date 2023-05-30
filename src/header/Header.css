@@ -191,6 +191,32 @@
     cursor: pointer;
 }
 
+.admin-bar{
+    background-color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-bar__nav-item{
+    margin-left: 0;
+    margin-right: 25px;
+    margin-bottom: 10px;
+}
+
+.admin-bar__nav{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: -10px;
+}
+
+.header__logout{
+    align-self: flex-start;
+    white-space: nowrap;
+}
+
+
 @media(max-width: 600px){
     .nav{
         display: none;

@@ -29,7 +29,7 @@ function PostPreview({post, view, isAdmin, full_width, alt}){
                     <p className="text text_sm feed__date">{post.getDate()}</p>
                     {isAdmin ? <p className={"text text_sm feed__views"}>{post.getViews()}</p> : ''}
                     <p className="feed__post-text text">{post.getDescription()}</p>
-                    <div className={"button text " + ((alt) ? "button_alt" : "")}>READ MORE</div>
+                    <div className={"button text " + ((alt) ? "button_alt" : "")}>{((!isAdmin) ? "READ MORE" : "EDIT")}</div>
                 </div>
             </Link>
         </div>

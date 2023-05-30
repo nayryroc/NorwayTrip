@@ -1,11 +1,21 @@
 import './Header.css';
 import {Link, useNavigate} from "react-router-dom";
 import { useEffect, useState } from 'react';
+import firebase from 'firebase/compat/app';
+import isExpired from '../Expired';
+import { getAuth, signOut } from "firebase/auth";
 
-function Header({subpage, title, bg, filter}){
+function Header({subpage, title, bg, filter, post}){
     const [open, setOpen] = useState(false);
+    const [admin, setAdmin] = useState(false);
 
-    
+    firebase.auth().onAuthStateChanged(user => {
+        if (user && !isExpired(user)) {
+            if(!admin)setAdmin(true);
+        }else{
+            if(admin)setAdmin(false);
+        }
+    })
 
 
     function openMenu(){
@@ -16,6 +26,15 @@ function Header({subpage, title, bg, filter}){
     function closeMenu(){
         setOpen(false);
         document.getElementById("root").classList.remove("menu-open");
+    }
+
+    function logout(){
+        const auth = getAuth();
+        signOut(auth).then(() => {
+        // Sign-out successful.
+        }).catch((error) => {
+        // An error happened.
+        });
     }
 
     return (
@@ -33,6 +52,23 @@ function Header({subpage, title, bg, filter}){
                 </nav>
             </div>
             <div className={"header-wrapper " + ((filter) ? "header-filter" : "")}>
+
+                {
+                    ((admin) ?
+                    
+                    <div className='admin-bar'>
+                        <div className='admin-bar__nav'>
+                            <Link to={"/admin/console"} className="nav__item title title_sm admin-bar__nav-item">Admin Console</Link>
+                            {(post != null) ? <Link to={"/admin/console/post?id=" + post} className="nav__item title title_sm admin-bar__nav-item">Edit Post</Link> : ""}
+                        </div>
+                        
+                        <button className='button header__logout' onClick={() => {logout()}}>Log Out</button>
+                    </div> 
+                    
+                    : "")
+                }
+
+
                 <div className={"header__content"}>
                     <Link to={"/"}><div className={"header__logo"} role={"img"} aria-label={"CS initials logo"}/></Link>
 

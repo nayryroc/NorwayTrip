@@ -78,7 +78,7 @@ function PostContent(){
 
     return(
         <div className="page">
-            <Header subpage={true} title={(post !== null) ? post.getTitle() : ""} bg={((post != null && post.getHeaderPath() != null && post.getHeaderPath() != "") ? post.getHeaderPath() : defBG)} filter={true}/>
+            <Header subpage={true} title={(post !== null) ? post.getTitle() : ""} bg={((post != null && post.getHeaderPath() != null && post.getHeaderPath() != "") ? post.getHeaderPath() : defBG)} filter={true} post={searchParams.get("id")}/>
             <div className="section">
                 <div className="section__content section__content_sm">
                     <p className="text text_sm post-date">{(post !== null) ? post.getDate() : ""}</p>

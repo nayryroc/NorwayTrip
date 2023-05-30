@@ -7,7 +7,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import firebase from "firebase/compat/app";
 import {Carousel} from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"
-
+import isExpired from "../../../Expired";
 
 function Create(){
     const [banner, setBanner] = useState(null);
@@ -20,17 +20,15 @@ function Create(){
     const [sectionIdx, setSectionIdx] = useState(null);
     const [error, setError] = useState(false);
 
-    function expired(){
-        let d = new Date(localStorage.getItem('loggedin'));
-        return d.setDate(d.getDate() + 1) < new Date();
-    }
 
     const navigate = useNavigate();
     useEffect(() => {
         if(!loaded) {
-            if (localStorage.getItem("loggedin") == null || expired()) {
-                navigate("/admin");
-            }
+            firebase.auth().onAuthStateChanged(user => {
+                if (!user || isExpired(user)) {
+                  navigate("/admin");
+                } 
+              })
             setLoaded(true);
         }
 
@@ -247,106 +245,108 @@ function Create(){
 
     let d = new Date();
     return(
-        <div className="section">
-            {
-                (popup) ?
-                <div className="popup">
-                    <div className="popup__content">
-                        <label htmlFor="popup-select" className={"popup__title title title_md"}>Select Section</label>
-                        <select name="popup-select" className={"popup__sections"} onChange={(event) => {setSectionType(event.target.value)}}>
-                            <option value="text">Text</option>
-                            <option value="image">Image</option>
-                            <option value="slider">Slider</option>
-                        </select>
-                        <div className="popup__buttons">
-                            <button className={"popup__add"} onClick={() => {createSection()}}>Add</button>
-                            <button className={"popup__cancel"} onClick={() => {setPopup(false)}}>Cancel</button>
+        <div className="page">
+            <div className="section">
+                {
+                    (popup) ?
+                    <div className="popup">
+                        <div className="popup__content">
+                            <label htmlFor="popup-select" className={"popup__title title title_md"}>Select Section</label>
+                            <select name="popup-select" className={"popup__sections"} onChange={(event) => {setSectionType(event.target.value)}}>
+                                <option value="text">Text</option>
+                                <option value="image">Image</option>
+                                <option value="slider">Slider</option>
+                            </select>
+                            <div className="popup__buttons">
+                                <button className={"popup__add"} onClick={() => {createSection()}}>Add</button>
+                                <button className={"popup__cancel"} onClick={() => {setPopup(false)}}>Cancel</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                    : ""
-            }
-            <div className="section__content">
-                <div className="new-post">
-                    <label className={"new-post__label title title_sm"} htmlFor="new-post-title">Title</label>
-                    <input className={"new-post__title title title_md"} type="text" id={"new-post-title"}/>
-                    <p className="text text_sm">{d.getMonth()+1}/{d.getDate()}/{d.getFullYear().toString().substring(2,4)}</p>
-                    <label className={"new-post__label title title_sm"} htmlFor="new-post-description">Summary</label>
-                    <textarea name="description" id="new-post-description" className={"new-post__desc"} cols="30" rows="10"></textarea>
-                    <label htmlFor="new-post-banner" className={"title title_sm"}>Banner Image</label>
-                    <div className="new-post__file-input" style={(banner != null) ? {backgroundImage:"url(" + URL.createObjectURL(banner) + ")"} : {}}>
-                        <input type="file" id={"new-post-banner"} accept={"image/jpeg, image/png"} className={"new-post__banner"} onChange={(event) => {setBanner(event.target.files[0]);}}/>
-                    </div>
+                        : ""
+                }
+                <div className="section__content">
+                    <div className="new-post">
+                        <label className={"new-post__label title title_sm"} htmlFor="new-post-title">Title</label>
+                        <input className={"new-post__title title title_md"} type="text" id={"new-post-title"}/>
+                        <p className="text text_sm">{d.getMonth()+1}/{d.getDate()}/{d.getFullYear().toString().substring(2,4)}</p>
+                        <label className={"new-post__label title title_sm"} htmlFor="new-post-description">Summary</label>
+                        <textarea name="description" id="new-post-description" className={"new-post__desc"} cols="30" rows="10"></textarea>
+                        <label htmlFor="new-post-banner" className={"title title_sm"}>Banner Image</label>
+                        <div className="new-post__file-input" style={(banner != null) ? {backgroundImage:"url(" + URL.createObjectURL(banner) + ")"} : {}}>
+                            <input type="file" id={"new-post-banner"} accept={"image/jpeg, image/png"} className={"new-post__banner"} onChange={(event) => {setBanner(event.target.files[0]);}}/>
+                        </div>
 
-                    <label htmlFor="new-post-header" className={"title title_sm"}>Header Image</label>
-                    <div className="new-post__file-input" style={(header != null) ? {backgroundImage:"url(" + URL.createObjectURL(header) + ")"} : {}}>
-                        <input type="file" id={"new-post-header"} accept={"image/jpeg, image/png"} className={"new-post__banner"} onChange={(event) => {setHeader(event.target.files[0]);}}/>
-                    </div>
+                        <label htmlFor="new-post-header" className={"title title_sm"}>Header Image</label>
+                        <div className="new-post__file-input" style={(header != null) ? {backgroundImage:"url(" + URL.createObjectURL(header) + ")"} : {}}>
+                            <input type="file" id={"new-post-header"} accept={"image/jpeg, image/png"} className={"new-post__banner"} onChange={(event) => {setHeader(event.target.files[0]);}}/>
+                        </div>
 
-                    <div className="post-content">
-                        <p className="post-content__title title title_sm">Post Content</p>
-                        <div className="post-content__add" onClick={(event)=>{addSection(event, 0)}}></div>
+                        <div className="post-content">
+                            <p className="post-content__title title title_sm">Post Content</p>
+                            <div className="post-content__add" onClick={(event)=>{addSection(event, 0)}}></div>
 
-                        {
-                            content.map((section, i) => {
-                                switch(section["type"]){
-                                    case "text":
-                                        return(
-                                            <div key={i} className="post-content__section">
-                                                <div className="post-content__delete" onClick={(event) => {removeSection(event, i)}}></div>
-                                                <textarea id={"post-section"+i} cols="30" rows="10" defaultValue={(content[i].content != null) ? content[i].content : ""} className={"post-content__textarea"} onChange={(event) => {updateSection(event, event.target.value, false)}}></textarea>
-                                                <div className="post-content__add" onClick={(event)=>{addSection(event, (i+1))}}></div>
-                                            </div>
-                                        );
-                                    case "image":
-                                        return(
-                                            <div key={i} className="post-content__section">
-                                                <div className="post-content__delete" onClick={(event) => {removeSection(event, i)}}></div>
-                                                <div className="new-post__file-input" style={(content[i].content !== null && content[i].content instanceof Object) ? {backgroundImage:"url(" + URL.createObjectURL(content[i].content) + ")"} : {}}>
-                                                    <input type="file" id={"post-section"+i} accept={"image/jpeg, image/png"} className={"new-post__banner"} onChange={(event) => {updateSection(event, event.target.files[0], true)}}/>
+                            {
+                                content.map((section, i) => {
+                                    switch(section["type"]){
+                                        case "text":
+                                            return(
+                                                <div key={i} className="post-content__section">
+                                                    <div className="post-content__delete" onClick={(event) => {removeSection(event, i)}}></div>
+                                                    <textarea id={"post-section"+i} cols="30" rows="10" defaultValue={(content[i].content != null) ? content[i].content : ""} className={"post-content__textarea"} onChange={(event) => {updateSection(event, event.target.value, false)}}></textarea>
+                                                    <div className="post-content__add" onClick={(event)=>{addSection(event, (i+1))}}></div>
                                                 </div>
-                                                <div className="post-content__add" onClick={(event)=>{addSection(event, (i+1))}}></div>
-                                            </div>
-                                        );
-                                    case "slider":
-                                        return(
-                                            <div key={i} className="post-content__section">
-                                                <div className="post-content__delete" onClick={(event) => {removeSection(event, i)}}></div>
+                                            );
+                                        case "image":
+                                            return(
+                                                <div key={i} className="post-content__section">
+                                                    <div className="post-content__delete" onClick={(event) => {removeSection(event, i)}}></div>
+                                                    <div className="new-post__file-input" style={(content[i].content !== null && content[i].content instanceof Object) ? {backgroundImage:"url(" + URL.createObjectURL(content[i].content) + ")"} : {}}>
+                                                        <input type="file" id={"post-section"+i} accept={"image/jpeg, image/png"} className={"new-post__banner"} onChange={(event) => {updateSection(event, event.target.files[0], true)}}/>
+                                                    </div>
+                                                    <div className="post-content__add" onClick={(event)=>{addSection(event, (i+1))}}></div>
+                                                </div>
+                                            );
+                                        case "slider":
+                                            return(
+                                                <div key={i} className="post-content__section">
+                                                    <div className="post-content__delete" onClick={(event) => {removeSection(event, i)}}></div>
 
-                                                <Carousel showArrows={true} showThumbs={false}>
+                                                    <Carousel showArrows={true} showThumbs={false}>
 
-                                                    {(content[i].content !== undefined) ?
-                                                        [1,2].map((v) => {
-                                                            if(v === 1){
-                                                                return createSlider(content[i], i);
-                                                            }else{
-                                                                return(
-                                                                    <div key={v} className="new-post__file-input">
-                                                                        <input type="file" id={"post-section" + i} accept={"image/jpeg, image/png"} className={"new-post__banner"} onChange={(event) => {updateSectionSlider(event, event.target.files[0], null, false)}}/>
-                                                                    </div>
-                                                                );
-                                                            }
-                                                        })
-                                                        :
-                                                        <div className="new-post__file-input">
-                                                            <input type="file" id={"post-section" + i} accept={"image/jpeg, image/png"} className={"new-post__banner"} onChange={(event) => {updateSectionSlider(event, event.target.files[0], null, false)}}/>
-                                                        </div>
-                                                    }
+                                                        {(content[i].content !== undefined) ?
+                                                            [1,2].map((v) => {
+                                                                if(v === 1){
+                                                                    return createSlider(content[i], i);
+                                                                }else{
+                                                                    return(
+                                                                        <div key={v} className="new-post__file-input">
+                                                                            <input type="file" id={"post-section" + i} accept={"image/jpeg, image/png"} className={"new-post__banner"} onChange={(event) => {updateSectionSlider(event, event.target.files[0], null, false)}}/>
+                                                                        </div>
+                                                                    );
+                                                                }
+                                                            })
+                                                            :
+                                                            <div className="new-post__file-input">
+                                                                <input type="file" id={"post-section" + i} accept={"image/jpeg, image/png"} className={"new-post__banner"} onChange={(event) => {updateSectionSlider(event, event.target.files[0], null, false)}}/>
+                                                            </div>
+                                                        }
 
 
-                                                </Carousel>
-                                                <div className="post-content__add" onClick={(event)=>{addSection(event, (i+1))}}></div>
-                                            </div>
-                                        );
-                                }
-                            })
-                        }
+                                                    </Carousel>
+                                                    <div className="post-content__add" onClick={(event)=>{addSection(event, (i+1))}}></div>
+                                                </div>
+                                            );
+                                    }
+                                })
+                            }
+
+                        </div>
+                        {(error) ? <p className="error error_center">Error creating post. Make sure all fields are filled out.</p> : ""}
+                        <button className={"button publish__button"} onClick={()=>{publish()}}>Publish</button>
+
 
                     </div>
-                    {(error) ? <p className="error error_center">Error creating post. Make sure all fields are filled out.</p> : ""}
-                    <button className={"create-button publish__button"} onClick={()=>{publish()}}>Publish</button>
-
-
                 </div>
             </div>
         </div>

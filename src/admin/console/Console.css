@@ -8,21 +8,18 @@
 
 .console__link{
     margin-bottom: 50px;
-    display: inline-block;
-    font-size: 1rem;
-    padding: 5px 10px;
-    background-color: #DBDAEA;
-    color: #000;
-    transition: 0.4s;
-    justify-self: flex-end;
-    margin-top: auto;
-    text-decoration: none;
 }
 
-.console__link:hover{
-    background-color: #cac9d9;
-}
 
 .console__edit{
     margin-bottom: 15px;
+}
+
+.console__header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.console__logout{
+    align-self: flex-start;
 }
