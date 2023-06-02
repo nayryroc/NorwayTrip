@@ -12,6 +12,8 @@
     margin-bottom: 15px;
     margin-inline: auto;
     width: 100%;
+    max-height: 350px;
+    object-fit: cover;
 }
 
 .post-content__slider-img{

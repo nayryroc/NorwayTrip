@@ -34,6 +34,9 @@ function EditPost(){
                 } 
               })
 
+             window.scrollTo(0, 0);
+            
+
             db.collection("Post").doc(searchParams.get("id")).withConverter(postConverter).get().then((snapshot) => {
                 let data = snapshot.data();
 
@@ -117,6 +120,12 @@ function EditPost(){
         setSectionIdx(index);
         //open popup
         setPopup(true);
+    }
+
+    function confirmRemove(event, index){
+        if(window.confirm("Are you sure you want to remove this section?") == true){
+            removeSection(event, index);
+        }
     }
 
     function removeSection(event, index){
@@ -307,9 +316,8 @@ function EditPost(){
 
     let d = new Date();
     return(
-        <div className="page">
-            <div className="section">
-                {
+        <div className="page page_overflow">
+            {
                     (popup) ?
                         <div className="popup">
                             <div className="popup__content">
@@ -327,6 +335,7 @@ function EditPost(){
                         </div>
                         : ""
                 }
+            <div className="section">
                 <div className="section__content">
                     <div className="new-post">
                         <label className={"new-post__label title title_sm"} htmlFor="new-post-title">Title</label>
@@ -355,7 +364,7 @@ function EditPost(){
                                         case "text":
                                             return(
                                                 <div key={i} className="post-content__section">
-                                                    <div className="post-content__delete" onClick={(event) => {removeSection(event, i)}}></div>
+                                                    <div className="post-content__delete" onClick={(event) => {confirmRemove(event, i)}}></div>
                                                     <textarea id={"post-section"+i} cols="30" rows="10" defaultValue={(content[i].content != null) ? content[i].content : ""} className={"post-content__textarea"} onChange={(event) => {updateSection(event, event.target.value, false)}}></textarea>
                                                     <div className="post-content__add" onClick={(event)=>{addSection(event, (i+1))}}></div>
                                                 </div>
@@ -363,7 +372,7 @@ function EditPost(){
                                         case "image":
                                             return(
                                                 <div key={i} className="post-content__section">
-                                                    <div className="post-content__delete" onClick={(event) => {removeSection(event, i)}}></div>
+                                                    <div className="post-content__delete" onClick={(event) => {confirmRemove(event, i)}}></div>
                                                     <div className="new-post__file-input" style={(content[i].content !== null && content[i].content instanceof Object) ? {backgroundImage:"url(" + URL.createObjectURL(content[i].content) + ")"} : {backgroundImage:"url(" + content[i].content + ")"}}>
                                                         <input type="file" id={"post-section"+i} accept={"image/jpeg, image/png"} className={"new-post__banner"} onChange={(event) => {updateSection(event, event.target.files[0], true)}}/>
                                                     </div>
@@ -373,7 +382,7 @@ function EditPost(){
                                         case "slider":
                                             return(
                                                 <div key={i} className="post-content__section">
-                                                    <div className="post-content__delete" onClick={(event) => {removeSection(event, i)}}></div>
+                                                    <div className="post-content__delete" onClick={(event) => {confirmRemove(event, i)}}></div>
 
                                                     <Carousel showArrows={true} showThumbs={false}>
 

@@ -9,6 +9,11 @@ function Header({subpage, title, bg, filter, post}){
     const [open, setOpen] = useState(false);
     const [admin, setAdmin] = useState(false);
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
+
+
     firebase.auth().onAuthStateChanged(user => {
         if (user && !isExpired(user)) {
             if(!admin)setAdmin(true);

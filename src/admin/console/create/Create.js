@@ -30,6 +30,9 @@ function Create(){
                 } 
               })
             setLoaded(true);
+
+            window.scrollTo(0, 0)
+             
         }
 
 
@@ -63,6 +66,13 @@ function Create(){
         setSectionIdx(index);
         //open popup
         setPopup(true);
+    }
+
+
+    function confirmRemove(event, index){
+        if(window.confirm("Are you sure you want to remove this section?") == true){
+            removeSection(event, index);
+        }
     }
 
     function removeSection(event, index){
@@ -245,9 +255,8 @@ function Create(){
 
     let d = new Date();
     return(
-        <div className="page">
-            <div className="section">
-                {
+        <div className="page page_overflow">
+            {
                     (popup) ?
                     <div className="popup">
                         <div className="popup__content">
@@ -265,11 +274,13 @@ function Create(){
                     </div>
                         : ""
                 }
+            <div className="section">
+                
                 <div className="section__content">
                     <div className="new-post">
+                        {/* <p className="text text_sm new-post__date">{d.getMonth()+1}/{d.getDate()}/{d.getFullYear().toString().substring(2,4)}</p>  */}
                         <label className={"new-post__label title title_sm"} htmlFor="new-post-title">Title</label>
                         <input className={"new-post__title title title_md"} type="text" id={"new-post-title"}/>
-                        <p className="text text_sm">{d.getMonth()+1}/{d.getDate()}/{d.getFullYear().toString().substring(2,4)}</p>
                         <label className={"new-post__label title title_sm"} htmlFor="new-post-description">Summary</label>
                         <textarea name="description" id="new-post-description" className={"new-post__desc"} cols="30" rows="10"></textarea>
                         <label htmlFor="new-post-banner" className={"title title_sm"}>Banner Image</label>
@@ -292,7 +303,7 @@ function Create(){
                                         case "text":
                                             return(
                                                 <div key={i} className="post-content__section">
-                                                    <div className="post-content__delete" onClick={(event) => {removeSection(event, i)}}></div>
+                                                    <div className="post-content__delete" onClick={(event) => {confirmRemove(event, i)}}></div>
                                                     <textarea id={"post-section"+i} cols="30" rows="10" defaultValue={(content[i].content != null) ? content[i].content : ""} className={"post-content__textarea"} onChange={(event) => {updateSection(event, event.target.value, false)}}></textarea>
                                                     <div className="post-content__add" onClick={(event)=>{addSection(event, (i+1))}}></div>
                                                 </div>
@@ -300,7 +311,7 @@ function Create(){
                                         case "image":
                                             return(
                                                 <div key={i} className="post-content__section">
-                                                    <div className="post-content__delete" onClick={(event) => {removeSection(event, i)}}></div>
+                                                    <div className="post-content__delete" onClick={(event) => {confirmRemove(event, i)}}></div>
                                                     <div className="new-post__file-input" style={(content[i].content !== null && content[i].content instanceof Object) ? {backgroundImage:"url(" + URL.createObjectURL(content[i].content) + ")"} : {}}>
                                                         <input type="file" id={"post-section"+i} accept={"image/jpeg, image/png"} className={"new-post__banner"} onChange={(event) => {updateSection(event, event.target.files[0], true)}}/>
                                                     </div>
@@ -310,7 +321,7 @@ function Create(){
                                         case "slider":
                                             return(
                                                 <div key={i} className="post-content__section">
-                                                    <div className="post-content__delete" onClick={(event) => {removeSection(event, i)}}></div>
+                                                    <div className="post-content__delete" onClick={(event) => {confirmRemove(event, i)}}></div>
 
                                                     <Carousel showArrows={true} showThumbs={false}>
 

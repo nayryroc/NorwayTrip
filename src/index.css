@@ -111,6 +111,10 @@ html{
     position: relative;
 }
 
+.section_post{
+    background: linear-gradient(180deg, #fff, #B1D3F7 75%);
+}
+
 .section_sm{
     padding-top: 25px;
 }
@@ -282,6 +286,12 @@ img{
 
 .page{
     background-color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.page_overflow{
+    overflow: visible;
 }
 
 @media(min-width: 2100px){
