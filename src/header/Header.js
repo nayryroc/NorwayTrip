@@ -52,6 +52,7 @@ function Header({subpage, title, bg, filter, post}){
                 <nav className={"header-overlay-nav"}>
                     <Link to={"/"} className={"header-overlay-nav__item title title_md"} onClick={closeMenu}>Home</Link>
                     <Link to={"/updates"} className={"header-overlay-nav__item title title_md"} onClick={closeMenu}>Updates</Link>
+                    <Link to={"/prayer"} className={"header-overlay-nav__item title title_md"} onClick={closeMenu}>Prayer</Link>
                     <Link to={"/support"} className={"header-overlay-nav__item title title_md"} onClick={closeMenu}>Support</Link>
                     <Link to={"/contact"} className={"header-overlay-nav__item title title_md"} onClick={closeMenu}>Contact</Link>
                 </nav>
@@ -80,8 +81,10 @@ function Header({subpage, title, bg, filter, post}){
                     <nav className={"nav"}>
                         <Link to={"/"} className={"nav__item title title_sm"}>Home</Link>
                         <Link to={"/updates"} className={"nav__item title title_sm"}>Updates</Link>
+                        <Link to={"/prayer"} className={"nav__item title title_sm"}>Prayer</Link>
                         <Link to={"/support"} className={"nav__item title title_sm"}>Support</Link>
                         <Link to={"/contact"} className={"nav__item title title_sm"}>Contact</Link>
+
                     </nav>
 
                     <button className={"menu"}  onClick={()=>{openMenu()}}></button>

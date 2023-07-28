@@ -1,0 +1,84 @@
+.prayer__intro-text{
+    margin-bottom: 3rem;
+}
+
+.prayer__title{
+    margin-bottom: 1rem;
+}
+
+.prayer{
+    margin-bottom: -1rem;
+}
+
+.prayer-card{
+    margin-bottom: 1rem;
+}
+
+.prayer__header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.prayer__add{
+    align-self: flex-start;
+}
+
+.add-prayer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.add-prayer__wrapper{
+    background-color: #fff;
+    padding: 25px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+    width: 50%;
+    max-width: 800px;
+}
+
+.add-prayer__label{
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+/* .add-prayer__name{
+    margin-bottom: 1rem;
+} */
+
+.add-prayer__content{
+    width: 100%;
+}
+
+.add-prayer__buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.add-prayer_closed{
+    display: none;
+}
+
+
+.add-prayer__checkbox-wrapper{
+    display: flex;
+    justify-content: flex-start;
+    
+}
+
+.add-prayer__private{
+    margin-left: 0.5rem;
+}
+
+.prayer-error{
+    margin: 0;
+    margin-bottom: 1rem;
+}

@@ -11,6 +11,7 @@ import EditPost from "./admin/console/post/EditPost";
 import Updates from './updates/Updates';
 import Support from './support/Support';
 import Contact from './contact/Contact';
+import Prayer from './prayer/Prayer';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -21,11 +22,11 @@ root.render(<BrowserRouter>
         <Route path={process.env.PUBLIC_URL + "/updates"} element={<Updates/>}/>
         <Route path={process.env.PUBLIC_URL + "/support"} element={<Support/>}/>
         <Route path={process.env.PUBLIC_URL + "/contact"} element={<Contact/>}/>
+        <Route path={process.env.PUBLIC_URL + "/prayer"} element={<Prayer/>}/>
         <Route path={process.env.PUBLIC_URL + "/admin"} element={<Admin/>}/>
         <Route path={process.env.PUBLIC_URL + "/admin/console"} element={<Console/>}/>
         <Route path={process.env.PUBLIC_URL + "/admin/console/create-post"} element={<Create/>}/>
         <Route path={process.env.PUBLIC_URL + "/admin/console/post"} element={<EditPost/>}/>
-
     </Routes>
 </BrowserRouter>);
 

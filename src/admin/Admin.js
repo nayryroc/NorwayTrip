@@ -37,7 +37,7 @@ function Admin(){
     firebase.auth().onAuthStateChanged(user => {
         if (user && !isExpired(user)) {
           nav("/admin/console");
-        } 
+        }
       })
 
 

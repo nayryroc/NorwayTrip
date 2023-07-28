@@ -1,0 +1,31 @@
+.prayer-card{
+    background-color: #fff;
+    box-shadow: 4px 4px 10px -4px rgba(0,0,0,0.65);
+    padding: 15px 25px;
+}
+
+.prayer-card__wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: -15px;
+}
+
+.prayer-card__date{
+    padding-left: 15px;
+}
+
+.prayer-card__title{
+    padding-left: 15px;
+}
+
+.prayer-card__divider{
+    height: 1px;
+    width: 100%;
+    background-color: #000;
+    margin-bottom: 0.5rem;
+}
+
+.prayer-card__content{
+    margin-bottom: 1rem;
+}

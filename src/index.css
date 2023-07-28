@@ -290,6 +290,10 @@ img{
     overflow: hidden;
 }
 
+.page_100vh{
+    height: 100vh;
+}
+
 .page_overflow{
     overflow: visible;
 }
@@ -335,4 +339,20 @@ img{
 
 .button:visited{
     color: #000;
+}
+
+input[type="text"] {
+    display: block;
+    outline: none;
+    padding: 4px 3px;
+    width: 100%;
+    border: 1px solid #000;
+}
+
+input[type="checkbox"]{
+    width: auto;
+}
+
+textarea {
+    border: 1px solid #000;
 }
