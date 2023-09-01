@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.cb8d7c64.css",
-    "main.js": "/static/js/main.60f23ab2.js",
+    "main.css": "/static/css/main.3ef81368.css",
+    "main.js": "/static/js/main.0407b8d7.js",
     "static/media/png-bg.jpg": "/static/media/png-bg.54fddf324e0c67a8ea28.jpg",
     "static/media/mountains.jpg": "/static/media/mountains.794e784c75bb86eb9bbe.jpg",
     "static/media/mountains2.jpg": "/static/media/mountains2.29e31c7c161c05358c04.jpg",
     "static/media/fjord-bg.jpg": "/static/media/fjord-bg.76d7f3a03945146ba73c.jpg",
+    "static/media/cory.jpg": "/static/media/cory.dcbbceb7a5048bd935e2.jpg",
     "static/media/png_sunset.jpg": "/static/media/png_sunset.980a88c7846b64e08b65.jpg",
     "static/media/Lato-Regular.ttf": "/static/media/Lato-Regular.9d883d540ee2b4de8024.ttf",
     "static/media/Lato-Bold.ttf": "/static/media/Lato-Bold.636be8de934918e38ed9.ttf",
-    "static/media/cory.jpg": "/static/media/cory.5a00e7dab4e35269fa7d.jpg",
     "static/media/CinzelDecorative-Bold.ttf": "/static/media/CinzelDecorative-Bold.4701e9921703cb64dfce.ttf",
     "static/media/CinzelDecorative-Regular.ttf": "/static/media/CinzelDecorative-Regular.c243877d82654b511c69.ttf",
     "static/media/mountains.png": "/static/media/mountains.1562acd00a758ff310a7.png",
@@ -21,11 +21,11 @@
     "static/media/plus.svg": "/static/media/plus.e5cd68e58ecd486bb4c6.svg",
     "static/media/logo-dark.svg": "/static/media/logo-dark.66e17d19f67a267098f7.svg",
     "static/media/logo.svg": "/static/media/logo.2a4281e8604016dacccb.svg",
-    "main.cb8d7c64.css.map": "/static/css/main.cb8d7c64.css.map",
-    "main.60f23ab2.js.map": "/static/js/main.60f23ab2.js.map"
+    "main.3ef81368.css.map": "/static/css/main.3ef81368.css.map",
+    "main.0407b8d7.js.map": "/static/js/main.0407b8d7.js.map"
   },
   "entrypoints": [
-    "static/css/main.cb8d7c64.css",
-    "static/js/main.60f23ab2.js"
+    "static/css/main.3ef81368.css",
+    "static/js/main.0407b8d7.js"
   ]
 }
