@@ -12,6 +12,8 @@ import Updates from './updates/Updates';
 import Support from './support/Support';
 import Contact from './contact/Contact';
 import Prayer from './prayer/Prayer';
+import Unsubscribe from './unsubscribe/Unsubscribe';
+import Light from './status-light/light';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -23,10 +25,12 @@ root.render(<BrowserRouter>
         <Route path={process.env.PUBLIC_URL + "/support"} element={<Support/>}/>
         <Route path={process.env.PUBLIC_URL + "/contact"} element={<Contact/>}/>
         <Route path={process.env.PUBLIC_URL + "/prayer"} element={<Prayer/>}/>
+        <Route path={process.env.PUBLIC_URL + "/unsubscribe"} element={<Unsubscribe/>}/>
         <Route path={process.env.PUBLIC_URL + "/admin"} element={<Admin/>}/>
         <Route path={process.env.PUBLIC_URL + "/admin/console"} element={<Console/>}/>
         <Route path={process.env.PUBLIC_URL + "/admin/console/create-post"} element={<Create/>}/>
         <Route path={process.env.PUBLIC_URL + "/admin/console/post"} element={<EditPost/>}/>
+        <Route path={process.env.PUBLIC_URL + "/statuslight"} element={<Light/>}/>
     </Routes>
 </BrowserRouter>);
 
