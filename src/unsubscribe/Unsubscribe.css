@@ -1,0 +1,11 @@
+
+.unsubscribe-error{
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+.unsubscribe-success{
+    margin-top: 1rem;
+    text-align: center;
+    color:limegreen;
+}

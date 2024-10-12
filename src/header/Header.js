@@ -5,7 +5,7 @@ import firebase from 'firebase/compat/app';
 import isExpired from '../Expired';
 import { getAuth, signOut } from "firebase/auth";
 
-function Header({subpage, title, bg, filter, post}){
+function Header({subpage, title, bg, filter, post, editFunction}){
     const [open, setOpen] = useState(false);
     const [admin, setAdmin] = useState(false);
 
@@ -42,6 +42,12 @@ function Header({subpage, title, bg, filter, post}){
         });
     }
 
+
+
+
+
+
+    
     return (
         <div className={"header " + ((subpage) ? "header_subpage " : "")} style={{backgroundImage:"url(" + bg + ")"}}>
             <div className={"header-overlay " + ((open) ? "visible" : "")}>
@@ -58,7 +64,7 @@ function Header({subpage, title, bg, filter, post}){
                 </nav>
             </div>
             <div className={"header-wrapper " + ((filter) ? "header-filter" : "")}>
-
+                {((editFunction != null) ? <button className='header__edit' onClick={editFunction}></button> : "" )}
                 {
                     ((admin) ?
                     

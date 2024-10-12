@@ -21,7 +21,7 @@ function Contact(size){
           }, (error) => {
               console.log(error.text);
           });
-      };
+       };
 
 
     return (

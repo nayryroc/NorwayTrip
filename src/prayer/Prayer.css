@@ -82,3 +82,16 @@
     margin: 0;
     margin-bottom: 1rem;
 }
+
+@media(max-width: 850px){
+    .add-prayer__wrapper{
+        width: 75%;
+        max-width: 800px;
+    }
+}
+
+@media(max-width: 500px){
+    .add-prayer__wrapper{
+        width: 95%;
+    }
+}

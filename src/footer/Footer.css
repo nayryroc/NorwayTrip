@@ -43,6 +43,8 @@
 
 .footer__nav{
     display: flex;
+    flex-wrap: wrap;
+    margin-bottom: -10px;
 }
 
 .footer__nav-item{
@@ -51,6 +53,7 @@
     text-decoration: none;
     padding-left: 0.25em;
     transition: 0.4s;
+    margin-bottom: 10px;
 }
 
 .footer__nav-item::before{

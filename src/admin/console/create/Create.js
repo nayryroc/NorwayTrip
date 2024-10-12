@@ -8,6 +8,10 @@ import firebase from "firebase/compat/app";
 import {Carousel} from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import isExpired from "../../../Expired";
+import sendEmail from "../../SendEmail"
+import uploadImages from "../../UploadImages"
+import Header from "../../../header/Header";
+import Footer from "../../../footer/Footer";
 
 function Create(){
     const [banner, setBanner] = useState(null);
@@ -19,7 +23,6 @@ function Create(){
     const [sectionType, setSectionType] = useState("");
     const [sectionIdx, setSectionIdx] = useState(null);
     const [error, setError] = useState(false);
-
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -154,8 +157,6 @@ function Create(){
     }
 
     function publish(){
-
-
         let title = document.getElementById("new-post-title").value;
         let desc = document.getElementById("new-post-description").value;
         let date = (d.getMonth()+1) + "/" + d.getDate() + "/" + d.getFullYear().toString().substring(2,4);
@@ -163,7 +164,10 @@ function Create(){
 
         if(content.length > 0 && noneempty() && title !== "" && desc !== ""){
             setError(false);
-            uploadImages(title, desc, date, timestamp);
+            let data = uploadImages(title, desc, date, timestamp, banner, header, content);
+            console.log(data.post);
+            setContent(data.c);
+            publishPost(data.post);
         }else{
             setError(true);
         }
@@ -179,54 +183,52 @@ function Create(){
     }
 
 
-    function uploadImages(title, desc, date, timestamp){
-        const storage = getStorage();
-        let imgRef = ref(storage, `${new Date().toString().replaceAll(/[ \-():]/g, "")}-${banner.name.replaceAll(/[ \-():]/g, "")}`);
-        uploadBytes(imgRef, banner).then((snapshot) => {
-            console.log("uploaded");
-        });
 
-        let imgRef2 = ref(storage, `${new Date().toString().replaceAll(/[ \-():]/g, "")}-${header.name.replaceAll(/[ \-():]/g, "")}`);
-        uploadBytes(imgRef2, header).then((snapshot) => {
-            console.log("uploaded");
-        });
-
-        let c = content;
-        for(let i = 0; i < content.length; i++){
-            if(content[i].type === "image"){
-                let reference = ref(storage, `${new Date().toString().replaceAll(/[ \-():]/g, "")}-${content[i].content.name.replaceAll(/[ \-():]/g, "")}`);
-
-                uploadBytes(reference, content[i].content).then((snapshot) => {
-                    console.log("uploaded");
-                });
-                c[i].content = reference.fullPath;
-                setContent(c);
-
-            }else if(content[i].type === "slider"){
-                for(let j = 0; j < content[i].content.length; j++){
-                    let reference = ref(storage, `${new Date().toString().replaceAll(/[ \-():]/g, "")}-${content[i].content[j].name.replaceAll(/[ \-():]/g, "")}`);
-                    uploadBytes(reference, content[i].content[j]).then((snapshot) => {
-                        console.log("uploaded");
-                    });
-                    c[i].content[j] = reference.fullPath;
-                    setContent(c);
-                }
-            }
-        }
-
-        let post = new Post(title, desc, imgRef.fullPath, imgRef2.fullPath, content, "", date, timestamp, 0);
-
-        db.collection("Post").withConverter(postConverter).add(post).then(() => {
-            navigate("/admin/console");
+    function publishPost(post){
+        db.collection("Post").withConverter(postConverter).add(post).then((ref) => {
             console.log("EditPost added!");
             const countRef = db.collection('PostCount').doc('postcount');
             countRef.update({
                 count: firebase.firestore.FieldValue.increment(1)
             });
+    
+            
+            sendNotification(ref.id, post.title);
         })
-
-
     }
+
+    function sendNotification(id, title){
+        let emails = [];
+        db.collection("Email").get().then((querySnapshot) => {
+            querySnapshot.docs.map(doc => {
+                let e = doc.data();
+                emails.push(e);
+            });
+    
+            let bccString = "";
+            emails.map((e) => {
+                bccString += e.email_address +",";
+            });
+    
+            let email = "corysauder@gmail.com";
+            let bcc = "bcc=" + bccString.substring(0, bccString.length);
+            let subject = "New Post: " + title;
+            let body = "Thank you for your interest in following along on my journey!%0D%0A%0D%0AI have just created a new blog post on my website. You can view it here: https%3A%2F%2Fwww.corysauder.com%2Fpost?id=" + id + "%0D%0A%0D%0AThank you,%0D%0ACory%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0AIf you no longer wish to receive these emails click the following link: https://www.corysauder.com/unsubscribe";
+    
+            if(window.confirm("Send notification email?")){
+                sendEmail(email, bcc, subject, body);
+                navigate("/admin/console");
+            }else{
+                navigate("/admin/console");
+            }
+    
+    
+        });
+    }
+    
+
+
+
 
 
     function createSlider(section, i){
@@ -253,6 +255,11 @@ function Create(){
         setVersion(version+1);
     }
 
+    function headerImage(){
+        console.log("Test");
+        document.getElementById("new-post-banner").click();
+    }
+
     let d = new Date();
     return(
         <div className="page page_overflow">
@@ -274,8 +281,9 @@ function Create(){
                     </div>
                         : ""
                 }
+            <div className="no-overflow">
+            <Header subpage={true} title={"test"} bg={banner} filter={true} editFunction={headerImage}/> 
             <div className="section">
-                
                 <div className="section__content">
                     <div className="new-post">
                         {/* <p className="text text_sm new-post__date">{d.getMonth()+1}/{d.getDate()}/{d.getFullYear().toString().substring(2,4)}</p>  */}
@@ -360,6 +368,8 @@ function Create(){
                     </div>
                 </div>
             </div>
+            <Footer alt={true}/>
+        </div>
         </div>
     );
 }

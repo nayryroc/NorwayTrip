@@ -16,6 +16,16 @@
     margin-bottom: 0.5em;
 }
 
+@media(max-width: 750px){
+    .about__content{
+        padding-left: 5%;
+        width: 60%;
+    }
+
+    .about__img{
+        width: 40%;
+    }
+}
 
 @media(max-width: 500px){
     .about{
@@ -24,7 +34,7 @@
     }
 
     .about__img{
-        width: 50%;
+        width: 75%;
         margin-bottom: 25px;
     }
 

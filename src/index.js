@@ -13,8 +13,7 @@ import Support from './support/Support';
 import Contact from './contact/Contact';
 import Prayer from './prayer/Prayer';
 import Unsubscribe from './unsubscribe/Unsubscribe';
-import Light from './status-light/light';
-
+import ReactionTime from './status-light/ReactionTime';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<BrowserRouter>
@@ -30,7 +29,8 @@ root.render(<BrowserRouter>
         <Route path={process.env.PUBLIC_URL + "/admin/console"} element={<Console/>}/>
         <Route path={process.env.PUBLIC_URL + "/admin/console/create-post"} element={<Create/>}/>
         <Route path={process.env.PUBLIC_URL + "/admin/console/post"} element={<EditPost/>}/>
-        <Route path={process.env.PUBLIC_URL + "/statuslight"} element={<Light/>}/>
+        <Route path={process.env.PUBLIC_URL + "/reaction-time"} element={<ReactionTime/>}/>
+
     </Routes>
 </BrowserRouter>);
 

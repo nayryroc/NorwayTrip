@@ -14,6 +14,7 @@ function Footer(alt){
                     <nav className="footer__nav">
                         <Link to={"/"} className="footer__nav-item title title_sm title_light">Home</Link>
                         <Link to={"/updates"} className="footer__nav-item title title_sm title_light">Updates</Link>
+                        <Link to={"/prayer"} className="footer__nav-item title title_sm title_light">Prayer</Link>
                         <Link to={"/support"} className="footer__nav-item title title_sm title_light">Support</Link>
                         <Link to={"/contact"} className="footer__nav-item title title_sm title_light">Contact</Link>
                     </nav>

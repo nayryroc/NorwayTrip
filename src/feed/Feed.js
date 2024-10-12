@@ -71,19 +71,14 @@ function Feed() {
 
 
     return(
-
-        <div className="section">
-            <div className="section__content">
-                <div className="feed">
-                    <div className="feed__posts">
-                        {
-                            posts.map((post, i) => {
-                                return <PostPreview key={i} post={post} view={true} isAdmin={false}/>
-                            })
-                        }
-                        {((currPage < pageCount) ? <button className='button button_alt feed-button' onClick={()=>{setCurrPage(currPage+1); loadPosts(currPage)}}>Load More</button> : "")}
-                    </div>
-                </div>
+        <div className="feed">
+            <div className="feed__posts">
+                {
+                    posts.map((post, i) => {
+                        return <PostPreview key={i} post={post} view={true} isAdmin={false}/>
+                    })
+                }
+                {((currPage < pageCount) ? <button className='button button_alt feed-button' onClick={()=>{setCurrPage(currPage+1); loadPosts(currPage)}}>Load More</button> : "")}
             </div>
         </div>
     );

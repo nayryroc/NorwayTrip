@@ -167,13 +167,13 @@ function Prayer(){
                 </div>
             </div>
 
-            <div className="section">
+            <div className="section section_blue">
                 <div className="section__content section__content_sm">
                     <p className="text support__intro-text">I would like to use this page as a way for us to know how we can be praying for one another. I plan to post prayer requests on here from time to time but I would love for you guys to post any requests you have on here as well! I want to build a community that will support one another in prayer.</p>
                     
                     <div className="prayer__header">
                         <p className="title title_md prayer__title">Requests</p>
-                        <button className='button prayer__add' onClick={()=>{setOpen(true)}}>Add Request</button>
+                        <button className='button button_alt prayer__add' onClick={()=>{setOpen(true)}}>Add Request</button>
                     </div>
                         
                     
@@ -190,7 +190,7 @@ function Prayer(){
             </div> 
 
 
-            <Footer alt={true}/>
+            <Footer alt={false}/>
         </div>
     );
 }
